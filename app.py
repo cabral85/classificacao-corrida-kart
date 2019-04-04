@@ -1,15 +1,16 @@
 from flask import Flask
 from flask import request
 from flask import json
+import pandas as pd
 import corrida
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
-def similar(produto):
+def resultado():
     retorno = corrida.resultadoCorrida()
     response = app.response_class(
-        response=json.dumps(retorno),
+        response=retorno.to_json(),
         status=200,
         mimetype='application/json'
     )
